@@ -3,6 +3,7 @@ name: Update AutoUpdater XML on Release
 on:
   release:
     types: [published]
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -14,7 +15,8 @@ jobs:
       - name: Checkout main
         uses: actions/checkout@v4
         with:
-          ref: main
+          ref: refs/heads/main
+          fetch-depth: 0
 
       - name: Build autoupdater.xml
         run: |
@@ -36,4 +38,4 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add autoupdater.xml
           git commit -m "Auto-update XML for ${{ github.event.release.tag_name }}" || exit 0
-          git push origin main
+          git push origin HEAD:main
