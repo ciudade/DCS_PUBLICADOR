@@ -1,0 +1,35 @@
+name: Update AutoUpdater XML on Release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  update-xml:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build autoupdater.xml
+        run: |
+          TAG="${{ github.event.release.tag_name }}"   # ej: v2.0.1.2
+          VER="${TAG#v}"                               # 2.0.1.2
+          cat > autoupdater.xml <<EOF
+          <?xml version="1.0" encoding="utf-8"?>
+          <item>
+            <version>${VER}</version>
+            <url>https://github.com/ciudade/DCS_PUBLICADOR/releases/latest/download/SGC.zip</url>
+            <mandatory value="false" />
+          </item>
+          EOF
+
+      - name: Commit XML
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add autoupdater.xml
+          git commit -m "Auto-update XML for ${{ github.event.release.tag_name }}" || exit 0
+          git push
