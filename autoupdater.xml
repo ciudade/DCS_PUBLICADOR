@@ -3,5 +3,5 @@
   <version>2.0.1.0</version>
   <url>https://github.com/ciudade/DCS_PUBLICADOR/releases/download/v2.0.1.0/SGC_2.0.1.0.zip</url>
   <changelog>https://raw.githubusercontent.com/ciudade/DCS_PUBLICADOR/main/changelog.txt</changelog>
-  <mandatory>false</mandatory>
+  <mandatory value="false" />
 </item>
