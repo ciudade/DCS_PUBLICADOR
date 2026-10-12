@@ -33,7 +33,6 @@ jobs:
           <item>
             <version>${VER}</version>
             <url>https://github.com/ciudade/DCS_PUBLICADOR/releases/latest/download/SGC.zip</url>
-            <changelog>https://raw.githubusercontent.com/ciudade/DCS_PUBLICADOR/main/changelog.txt</changelog>
             <mandatory value="false" />
           </item>
           EOF
